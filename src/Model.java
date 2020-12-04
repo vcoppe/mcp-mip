@@ -50,9 +50,7 @@ public class Model {
         if (threads > 0) model.set(GRB.IntParam.Threads, threads);
         model.optimize();
 
-        System.out.println("\nOptimal solution : " + model.get(GRB.DoubleAttr.ObjVal));
-
-        System.out.print("Assignment       :");
+        System.out.print("assignment       :");
         for (int i = 0; i < x.length; i++)
             System.out.printf("%2.0f ", x[i].get(GRB.DoubleAttr.X));
 
