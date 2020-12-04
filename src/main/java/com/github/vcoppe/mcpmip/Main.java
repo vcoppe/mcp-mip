@@ -1,3 +1,5 @@
+package com.github.vcoppe.mcpmip;
+
 import gurobi.GRBException;
 
 import java.io.File;

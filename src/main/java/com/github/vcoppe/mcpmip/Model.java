@@ -1,3 +1,5 @@
+package com.github.vcoppe.mcpmip;
+
 import gurobi.*;
 
 public class Model {

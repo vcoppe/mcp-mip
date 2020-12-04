@@ -1,0 +1,53 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.vcoppe.mcp-mip</groupId>
+    <artifactId>mcp-mip</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>mcp-mip</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+
+		<!-- You probably want to change this to match your local machine   -->
+		<!-- but chances are high that it should be the right place for you -->
+		<!-- too.                                                           -->
+		<gurobi.home>/Library/gurobi903/mac64</gurobi.home>
+    </properties>
+
+	<!-- To run the file from command line just do :                        -->
+	<!-- java -cp '/Library/gurobi903/mac64/lib/*:./target/mcp-mip-1.0-SNAPSHOT.jar' com.github.vcoppe.mcpmip.Main -->
+
+	<!-- Configure the dependency to gurobi --> 
+	<dependencies>
+		<dependency>
+			<groupId>com.gurobi</groupId>
+			<artifactId>gurobi</artifactId>
+			<version>9.03</version>
+			<scope>system</scope>
+			<systemPath>${gurobi.home}/lib/gurobi.jar</systemPath>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- That's a drag, but we must tell what version of javac to use -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>     
+	</build>
+</project>            
+                      
+                      
+                      
+                      
