@@ -43,22 +43,22 @@ public class Main {
 
     public static void main(String[] args) throws GRBException {
         if (args.length < 1) {
-            System.out.println("Arguments needed :\n\tfilename\n\t[timeLimit]");
+            System.out.println("Arguments needed :\n\tfilename\n\t[threads]\n\t[timeLimit]");
             return;
         }
 
         readMCP(args[0]);
 
-        int timeLimit = Integer.MAX_VALUE;
-        if (args.length == 2)
-            timeLimit = Integer.parseInt(args[1]);
+        int timeLimit = Integer.MAX_VALUE, threads = 0;
+        if (args.length >= 2) threads = Integer.parseInt(args[1]);
+        if (args.length == 3) timeLimit = Integer.parseInt(args[2]);
 
         Model mip = new Model(n, w);
 
         System.out.println("MIP model created");
         System.out.println("Solving...");
 
-        mip.solve(timeLimit);
+        mip.solve(timeLimit, threads);
 
         System.out.println("runTime          : " + mip.runTime());
         System.out.printf("objValue         : %.0f\n", mip.objVal());

@@ -27,27 +27,6 @@ public class Model {
         }
 
         GRBLinExpr rhs;
-        /*for (int u = 0; u < n; u++) {
-            for (int v = u + 1; v < n; v++) {
-                rhs = new GRBLinExpr();
-                rhs.addTerm(1, x[u]);
-                rhs.addTerm(1, x[v]);
-                model.addConstr(c[u][v], GRB.LESS_EQUAL, rhs, "constraint_a_" + u + "_" + v);
-                rhs = new GRBLinExpr();
-                rhs.addTerm(1, x[u]);
-                rhs.addTerm(-1, x[v]);
-                model.addConstr(c[u][v], GRB.GREATER_EQUAL, rhs, "constraint_b_" + u + "_" + v);
-                rhs = new GRBLinExpr();
-                rhs.addTerm(-1, x[u]);
-                rhs.addTerm(1, x[v]);
-                model.addConstr(c[u][v], GRB.GREATER_EQUAL, rhs, "constraint_c_" + u + "_" + v);
-                rhs = new GRBLinExpr();
-                rhs.addConstant(2);
-                rhs.addTerm(-1, x[u]);
-                rhs.addTerm(-1, x[v]);
-                model.addConstr(c[u][v], GRB.LESS_EQUAL, rhs, "constraint_d_" + u + "_" + v);
-            }
-        }*/
         for (int u = 0; u < n; u++) {
             for (int v = u + 1; v < n; v++) {
                 rhs = new GRBLinExpr();
@@ -66,13 +45,9 @@ public class Model {
         }
     }
 
-    public void solve() throws GRBException {
-        solve(Integer.MAX_VALUE);
-    }
-
-    public void solve(double timeLimit) throws GRBException {
+    public void solve(double timeLimit, int threads) throws GRBException {
         model.set(GRB.DoubleParam.TimeLimit, timeLimit);
-        model.set(GRB.IntParam.Threads, 1);
+        if (threads > 0) model.set(GRB.IntParam.Threads, threads);
         model.optimize();
 
         System.out.println("\nOptimal solution : " + model.get(GRB.DoubleAttr.ObjVal));
